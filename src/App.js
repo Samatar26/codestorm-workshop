@@ -1,18 +1,33 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import {Header} from './Components/Header';
 import './App.css';
 
 class App extends Component {
+  state={
+    clickCount: 0,
+  }
+  incrementCount = (count) => {
+    this.setState({
+      clickCount:this.state.clickCount+=count,
+    })
+  }
+
+  resetCount = () => {
+    this.setState({
+      clickCount:0
+    })
+  }
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <span className="App-intro">
+          {this.state.clickCount}
+        </span>
+        <section className="buttons">
+        <button onClick={this.incrementCount.bind(this, 1)}>+</button>
+        <button onClick={this.resetCount}>Reset</button>
+        <button onClick={this.incrementCount.bind(this, -1)}>-</button>
+        </section>
       </div>
     );
   }
